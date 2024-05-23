@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Player</title>
+    <link rel="icon" href="radio.png" type="image/x-icon">
+
+     <!-- Latest compiled and minified CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Latest compiled JavaScript -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <style>
+        #rClaro{
+            color: #FF9999;
+        }
+        #rIntenso, h5{
+            color: #F7636A;
+        }
+     </style>
+
+      <link rel="manifest" href="manifest.json" />
+      <!-- Soporte para iOS -->
+      <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+      <meta name="apple-mobile-web-app-status-bar" content="#333333" />
+      <meta name="theme-color" content="#16161d" />
+
+</head>
+
+<body data-bs-theme="dark" style="background-color: #16161d;">
+
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #333333;">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso">
+            <img src="radio2.png" alt="" width="27px" height="27px" class="d-inline-block align-text-top">
+            Radio Player
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Funciones Extra</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" style="background-color: #16161d;">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="btn-frase">Frase del Dia</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="btn-cotizacion">Cotizacion Dolar Blue</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="install" hidden>Instalar App</a>
+                </li>
+              </ul>
+            </div>
+            <div class="">
+              <div class="offcanvas-body" style="background-color: #16161d;">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link" style="font-size: 12px;" href="https://cristian-bazan.github.io/" target="_blank">Info del Desarrollador</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+   
+    <div class="container-fluid ms-1 mt-5 me-0 pe-0" >
+        <div class="row me-0 pt-3 ps-0 pe-0 pb-4">
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Cadena 3</h4>
+                <audio controls>
+                    <source src="https://27363.live.streamtheworld.com/RADIO3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" id="rClaro">40 Principales</h4>
+                <audio controls>
+                    <source src="https://frontend.radiohdvivo.com/los40/live" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Radio Disney</h4>
+                <audio controls>
+                    <source src="https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Aspen</h4>
+                <audio controls>
+                    <source src="https://us-b4-p-e-pb13-audio.cdn.mdstrm.com/live-audio-aw-bkp/60a2745ff943100826374a70?aid=60106eadf34de307dd720e7b&pid=NgeKSRrpU1b0xRaKQfR8wt3DScrCLVrJ&sid=6bpalvAWFWt0kF9Q38BL3TzqgSWnafJo&uid=Bf6eRoIuEoPFqhpat46rsoTpYnG8kRtt&es=us-b4-p-e-pb13-audio.cdn.mdstrm.com&ote=1715396440533&ot=zVRiVzkySi34AS1rDTK63A&proto=https&pz=us&cP=128000&awCollectionId=60106eadf34de307dd720e7b&aw_0_1st.playerId=mediastream-player-aspen-pie&liveId=60a2745ff943100826374a70&referer=https%3A%2F%2Fwww.radios-argentinas.org%2F&propertyName=mediastream-player-aspen-pie&listenerId=Bf6eRoIuEoPFqhpat46rsoTpYnG8kRtt" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" id="rClaro">Cadena Heat</h4>
+              <audio controls>
+                  <source src="https://27323.live.streamtheworld.com/CADENAHEAT.mp3?dist=c3-web" type="audio/mpeg">
+              </audio>
+            </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" id="rClaro">Rock & Pop</h4>
+              <audio controls>
+                  <source src="https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=300x250%2C728x90&burst-time=15&sbmid=8612fe1c-bef6-448e-d52f-fda7ac9ceca1" type="audio/mpeg">
+              </audio>
+            </div>
+        </div>
+        <div class="row me-0 pt-4 ps-0 pe-0 pb-4">
+          
+        </div>
+    </div>
+    <div class="container-fluid mb-2 pb-2">
+      <div class="d-flex justify-content-center mb-2 pb-2">
+        <button class="btn btn-outline-secondary btn-lg me-1" id="btnlaNacion">Ver LaNacion+</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1" id="btnTN">Ver TN</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divLaNacion" style="display: none;">
+        <div class="d-flex justify-content-center">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/ocFG3yor--M?si=CF5rMr9ZVFGLLyYw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divTN" style="display: none;">
+        <div class="d-flex justify-content-center">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/cb12KmMMDJA?si=KnXoKDZwTHzuE1GB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <script src="js.js"></script>
+
+</body>
+</html>
