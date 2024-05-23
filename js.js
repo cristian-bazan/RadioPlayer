@@ -32,11 +32,15 @@ $(document).ready(function(){
     });
 
     $("#btnlaNacion").click(function(){
-        $("#divLaNacion").slideToggle("slow");
+        $("#divLaNacion").slideToggle("slow")
+        $("#btnlaNacion").toggleClass("btn-outline-secondary")
+        $("#btnlaNacion").toggleClass("btn-secondary")
     })
 
     $("#btnTN").click(function(){
         $("#divTN").slideToggle("slow")
+        $("#btnTN").toggleClass("btn-outline-secondary")
+        $("#btnTN").toggleClass("btn-secondary")
     })
     
     let installPrompt = null;
