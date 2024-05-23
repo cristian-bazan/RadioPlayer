@@ -11,16 +11,16 @@ La idea principal detrás de RPlayer es poder ser una compañía de fondo durant
 
 ### Funciones
 Actualmente **RPlayer** posee las siguientes funciones:
-- **Escuchar Radios**
--- Cadena 3
--- Los 40 Principales
--- Radio Disney
--- Aspen
--- Cadena Heat
--- Rock & Pop
+- **Escuchar Radios**  
+-- Cadena 3  
+-- Los 40 Principales  
+-- Radio Disney  
+-- Aspen  
+-- Cadena Heat  
+-- Rock & Pop  
 #####
-- **Ver Tv**
--- La Nación+
+- **Ver Tv**  
+-- La Nación+  
 -- TN
 #####
 - **Frase del Día**
