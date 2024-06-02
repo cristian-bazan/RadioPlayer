@@ -42,6 +42,12 @@ $(document).ready(function(){
         $("#btnTN").toggleClass("btn-outline-secondary")
         $("#btnTN").toggleClass("btn-secondary")
     })
+
+    $("#btnEl12").click(function(){
+        $("#divEl12").slideToggle("slow")
+        $("#btnEl12").toggleClass("btn-outline-secondary")
+        $("#btnEl12").toggleClass("btn-secondary")
+    })
     
     let installPrompt = null;
     const installButton = document.querySelector("#install");

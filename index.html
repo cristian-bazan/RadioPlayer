@@ -44,7 +44,7 @@
 
     <nav class="navbar navbar-dark fixed-top" style="background-color: #333333;">
         <div class="container-fluid">
-          <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso">
+          <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso" href="https://cristian-bazan.github.io/RadioPlayer/">
             <img src="radio2.png" alt="" width="27px" height="27px" class="d-inline-block align-text-top">
             Radio Player
           </a>
@@ -121,6 +121,12 @@
                   <source src="https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=300x250%2C728x90&burst-time=15&sbmid=8612fe1c-bef6-448e-d52f-fda7ac9ceca1" type="audio/mpeg">
               </audio>
             </div>
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" id="rClaro">La 100</h4>
+              <audio controls>
+                  <source src="https://27323.live.streamtheworld.com/FM999_56AAC.aac?dist=la100_webplayer&autoplay=0&tdsdk=js-2.9&swm=true&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=380d9612-3dfe-4755-8e15-238eaf11e9af" type="audio/mpeg">
+              </audio>
+            </div>
         </div>
         <div class="row me-0 pt-4 ps-0 pe-0 pb-4">
           
@@ -130,6 +136,7 @@
       <div class="d-flex justify-content-center mb-2 pb-2">
         <button class="btn btn-outline-secondary btn-lg me-1" id="btnlaNacion">Ver LaNación+</button>
         <button class="btn btn-outline-secondary btn-lg ms-1" id="btnTN">Ver TN</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1" id="btnEl12">Ver El 12 Cba</button>
       </div>
     </div>
     <div class="row">
@@ -141,6 +148,11 @@
       <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divTN" style="display: none;">
         <div class="d-flex justify-content-center">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/cb12KmMMDJA?si=KnXoKDZwTHzuE1GB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divEl12" style="display: none;">
+        <div class="d-flex justify-content-center">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/sFZe_RPnNSo?si=zKCrEv8dGVVAQn3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
