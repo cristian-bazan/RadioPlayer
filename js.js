@@ -49,6 +49,12 @@ $(document).ready(function(){
         $("#btnEl12").toggleClass("btn-secondary")
     })
     
+    $("#btnCronica").click(function(){
+        $("#divCronica").slideToggle("slow")
+        $("#btnCronica").toggleClass("btn-outline-secondary")
+        $("#btnCronica").toggleClass("btn-secondary")
+    })
+
     let installPrompt = null;
     const installButton = document.querySelector("#install");
 
