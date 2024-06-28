@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    var swalBackground = "#333333"
+    var swalColor = "#FF9966"
+    var swalConfirmButtonColor = "#424242"
+
     $("#btn-frase").click(function(){
         fetch('txt.txt')
         .then(res => res.text())
@@ -7,9 +11,9 @@ $(document).ready(function(){
             let lines = content.split(/\n/)
             Swal.fire({
                 title: lines[Math.floor(Math.random() * lines.length)].toString(),
-                color: "#FF9966",
-                background: "#333333",
-                confirmButtonColor: "#424242",
+                color: swalColor,
+                background: swalBackground,
+                confirmButtonColor: "#4CAF50",
                 confirmButtonText: "Gracias!"
             })
         })
@@ -18,18 +22,22 @@ $(document).ready(function(){
     $("#btn-cotizacion").click(function(){
         Swal.fire({
             title: '<div class="d-flex justify-content-center "><iframe style="width:320px;height:260px;border-radius:10px;box-shadow:2px 4px 4px rgb(0 0 0 / 25%);justify-content:center;border:1px solid #bcbcbc" src="https://dolarhoy.com/i/cotizaciones/dolar-blue" frameborder="0"></iframe></div>',
-            background: "#333333",
+            background: swalBackground,
             icon: "success",
-            confirmButtonColor: "#424242",
+            confirmButtonColor: "#4CAF50",
             confirmButtonText: "OK"
           })
     })
 
+    var hoverActiveColor = '#FF9999'
+    var hoverInactiveColor = '';
+
     $('li a').hover(function() {
-        $(this).css('color', '#FF9999').addClass("active")
+        $(this).css('color', hoverActiveColor).addClass("active")
     }, function() {
-        $(this).css('color', '').removeClass("active")
+        $(this).css('color', hoverInactiveColor).removeClass("active")
     });
+
 
     $("#btnlaNacion").click(function(){
         $("#divLaNacion").slideToggle("slow")
@@ -53,6 +61,43 @@ $(document).ready(function(){
         $("#divCronica").slideToggle("slow")
         $("#btnCronica").toggleClass("btn-outline-secondary")
         $("#btnCronica").toggleClass("btn-secondary")
+    })
+
+    $("#switchLight").change(function(){
+
+        if ($(this).prop("checked") == true) {
+            // Light
+            $("#body").css({'background-color':'#F5F5F5'})
+            $("[name=titulo]").css({'color':'#d71414'})
+            $(".offcanvas-body").css({'background-color':'#F5F5F5'})
+            swalBackground = "#F5F5F5"
+            swalColor = "#FF0000"
+            hoverActiveColor = '#FF0000'
+            hoverInactiveColor = '#d71414';
+            $('li a').css('color', hoverActiveColor).addClass("active")
+            $('li a').css('color', hoverInactiveColor).removeClass("active")
+            $("[name=navbar]").css({'background-color':'#FFFFFF'})
+            $("[name=navbarButton]").css({'background-color':'#696969'})
+            $("h5").css({'color':'#696969'})
+            $("[name =header]").css({'background-color':'#FFFFFF'})
+
+        } else {
+            // Dark
+            $("#body").css({'background-color':'#16161d'})
+            $("[name=titulo]").css({'color':'#FF9999'})
+            $(".offcanvas-body").css({'background-color':'#16161d'})
+            swalBackground = "#333333"
+            swalColor = "#FF9966"
+            hoverActiveColor = '#FF9999'
+            hoverInactiveColor = '';
+            $('li a').css('color', hoverActiveColor).addClass("active")
+            $('li a').css('color', hoverInactiveColor).removeClass("active")
+            $("[name=navbar]").css({'background-color':'#333333'})
+            $("[name=navbarButton]").css({'background-color':''})
+            $("h5").css({'color':''})
+            $("[name =header]").css({'background-color':''})
+        }
+        
     })
 
     let installPrompt = null;

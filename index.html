@@ -17,11 +17,14 @@
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
      <style>
-        #rClaro{
+        [name=titulo]{
             color: #FF9999;
         }
         #rIntenso, h5{
             color: #F7636A;
+        }
+        #rOscuro{
+            color: #FF0000;
         }
      </style>
 
@@ -40,19 +43,23 @@
 
 </head>
 
-<body data-bs-theme="dark" style="background-color: #16161d;">
+<body data-bs-theme="dark" id="body" style="background-color: #16161d;">
 
-    <nav class="navbar navbar-dark fixed-top" style="background-color: #333333;">
+    <nav class="navbar navbar-dark fixed-top" name="navbar" style="background-color: #333333;">
         <div class="container-fluid">
           <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso" href="">
             <img src="radio2.png" alt="" width="27px" height="27px" class="d-inline-block align-text-top">
             Radio Player
           </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchLight">
+            <label class="form-check-label" for="switchLight">&#127769 / &#9728</label>
+          </div>
+          <button class="navbar-toggler" name="navbarButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-            <div class="offcanvas-header">
+            <div class="offcanvas-header" name="header">
               <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Funciones Extra</h5>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -86,43 +93,43 @@
     <div class="container-fluid ms-1 mt-5 me-0 pe-0" >
         <div class="row me-0 pt-3 ps-0 pe-0 pb-4">
             <div class="col-xl-3 col-lg-6 mt-3">
-                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Cadena 3</h4>
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Cadena 3</h4>
                 <audio controls>
                     <source src="https://27363.live.streamtheworld.com/RADIO3.mp3" type="audio/mpeg">
                 </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-                <h4 style="font-family: 'CascadiaCode';" id="rClaro">40 Principales</h4>
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">40 Principales</h4>
                 <audio controls>
                     <source src="https://frontend.radiohdvivo.com/los40/live" type="audio/mpeg">
                 </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Radio Disney</h4>
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Radio Disney</h4>
                 <audio controls>
                     <source src="https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC" type="audio/mpeg">
                 </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-                <h4 style="font-family: 'CascadiaCode';" id="rClaro">Aspen</h4>
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Aspen</h4>
                 <audio controls>
                     <source src="https://us-b4-p-e-pb13-audio.cdn.mdstrm.com/live-audio-aw-bkp/60a2745ff943100826374a70?aid=60106eadf34de307dd720e7b&pid=NgeKSRrpU1b0xRaKQfR8wt3DScrCLVrJ&sid=6bpalvAWFWt0kF9Q38BL3TzqgSWnafJo&uid=Bf6eRoIuEoPFqhpat46rsoTpYnG8kRtt&es=us-b4-p-e-pb13-audio.cdn.mdstrm.com&ote=1715396440533&ot=zVRiVzkySi34AS1rDTK63A&proto=https&pz=us&cP=128000&awCollectionId=60106eadf34de307dd720e7b&aw_0_1st.playerId=mediastream-player-aspen-pie&liveId=60a2745ff943100826374a70&referer=https%3A%2F%2Fwww.radios-argentinas.org%2F&propertyName=mediastream-player-aspen-pie&listenerId=Bf6eRoIuEoPFqhpat46rsoTpYnG8kRtt" type="audio/mpeg">
                 </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-              <h4 style="font-family: 'CascadiaCode';" id="rClaro">Cadena Heat</h4>
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Cadena Heat</h4>
               <audio controls>
                   <source src="https://27323.live.streamtheworld.com/CADENAHEAT.mp3?dist=c3-web" type="audio/mpeg">
               </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-              <h4 style="font-family: 'CascadiaCode';" id="rClaro">Rock & Pop</h4>
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Rock & Pop</h4>
               <audio controls>
                   <source src="https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=300x250%2C728x90&burst-time=15&sbmid=8612fe1c-bef6-448e-d52f-fda7ac9ceca1" type="audio/mpeg">
               </audio>
             </div>
             <div class="col-xl-3 col-lg-6 mt-3">
-              <h4 style="font-family: 'CascadiaCode';" id="rClaro">La 100</h4>
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">La 100</h4>
               <audio controls>
                   <source src="https://27323.live.streamtheworld.com/FM999_56AAC.aac?dist=la100_webplayer&autoplay=0&tdsdk=js-2.9&swm=true&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=380d9612-3dfe-4755-8e15-238eaf11e9af" type="audio/mpeg">
               </audio>
