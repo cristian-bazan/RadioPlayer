@@ -63,6 +63,30 @@ $(document).ready(function(){
         $("#btnCronica").toggleClass("btn-secondary")
     })
 
+    $("#btnCanal26").click(function(){
+        $("#divCanal26").slideToggle("slow")
+        $("#btnCanal26").toggleClass("btn-outline-secondary")
+        $("#btnCanal26").toggleClass("btn-secondary")
+    })
+
+    $("#btnTelefeNoticias").click(function(){
+        $("#divTelefeNoticias").slideToggle("slow")
+        $("#btnTelefeNoticias").toggleClass("btn-outline-secondary")
+        $("#btnTelefeNoticias").toggleClass("btn-secondary")
+    })
+
+    $("#btnC5N").click(function(){
+        $("#divC5N").slideToggle("slow")
+        $("#btnC5N").toggleClass("btn-outline-secondary")
+        $("#btnC5N").toggleClass("btn-secondary")
+    })
+
+    $("#btnTelediarioRioIV").click(function(){
+        $("#divTelediarioRioIV").slideToggle("slow")
+        $("#btnTelediarioRioIV").toggleClass("btn-outline-secondary")
+        $("#btnTelediarioRioIV").toggleClass("btn-secondary")
+    })
+
     $("#switchLight").change(function(){
 
         if ($(this).prop("checked") == true) {
