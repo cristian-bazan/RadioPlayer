@@ -45,7 +45,7 @@
 
 <body data-bs-theme="dark" id="body" style="background-color: #16161d;">
 
-    <nav class="navbar navbar-dark fixed-top" name="navbar" style="background-color: #333333;">
+    <nav id="navbar" class="navbar fixed-top bg-dark border-bottom border-body" name="navbar" style="background-color: #333333;">
         <div class="container-fluid">
           <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso" href="">
             <img src="radio2.png" alt="" width="27px" height="27px" class="d-inline-block align-text-top">
@@ -163,29 +163,45 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divLaNacion" style="display: none;">
-        <div class="d-flex justify-content-center">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/G5pHuBCqgrs?si=AhZ-BZZT61BLLrik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="container-fluid mt-0 mb-0 pb-0 pe-0 col-sm-6" id="divLaNacion" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe src="https://www.youtube.com/embed/G5pHuBCqgrs?si=AhZ-BZZT61BLLrik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divTN" style="display: none;">
-        <div class="d-flex justify-content-center">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/cb12KmMMDJA?si=KnXoKDZwTHzuE1GB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="container-fluid mt-0 mb-0 pb-0 ps-0 col-sm-6" id="divTN" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe src="https://www.youtube.com/embed/cb12KmMMDJA?si=KnXoKDZwTHzuE1GB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divEl12" style="display: none;">
-        <div class="d-flex justify-content-center">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/sFZe_RPnNSo?si=zKCrEv8dGVVAQn3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="container-fluid mt-0 mb-0 pb-0 pe-0 col-sm-6" id="divEl12" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe src="https://www.youtube.com/embed/sFZe_RPnNSo?si=zKCrEv8dGVVAQn3J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="container-fluid mt-0 mb-3 pb-3 col-sm-6" id="divCronica" style="display: none;">
-        <div class="d-flex justify-content-center">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/avly0uwZzOE?si=-fsceAVaeC74p2K9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="container-fluid mt-0 mb-0 pb-0 ps-0 col-sm-6" id="divCronica" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe src="https://www.youtube.com/embed/avly0uwZzOE?si=-fsceAVaeC74p2K9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
     
     <script src="js.js"></script>
+    <script>
+      let prevScrollPos = window.pageYOffset;
+      const navbar = document.getElementById("navbar");
+    
+      window.onscroll = function() {
+        let currentScrollPos = window.pageYOffset;
+    
+        // Solo reacciona a los cambios en la posición vertical
+        if (prevScrollPos > currentScrollPos) {
+          navbar.style.top = "0";  // Mostrar navbar al subir
+        } else if (prevScrollPos < currentScrollPos) {
+          navbar.style.top = "-70px";  // Ocultar navbar al bajar
+        }
+        prevScrollPos = currentScrollPos;
+      };
+    </script>
 
 </body>
 </html>
