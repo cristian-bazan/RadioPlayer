@@ -21,7 +21,7 @@ $(document).ready(function(){
 
     $("#btn-cotizacion").click(function(){
         Swal.fire({
-            title: '<div class="d-flex justify-content-center "><iframe style="width:320px;height:260px;border-radius:10px;box-shadow:2px 4px 4px rgb(0 0 0 / 25%);justify-content:center;border:1px solid #bcbcbc" src="https://dolarhoy.com/i/cotizaciones/dolar-blue" frameborder="0"></iframe></div>',
+            title: ' <div class="d-flex justify-content-center "><iframe style="width:320px;height:260px;border-radius:10px;box-shadow:2px 4px 4px rgb(0 0 0 / 25%);display:flex;justify-content:center;border:1px solid #bcbcbc" src="https://dolarhoy.com/i/cotizaciones/dolar-bancos-y-casas-de-cambio" frameborder="0"></iframe></div>                 <div class="d-flex justify-content-center "><iframe style="width:320px;height:260px;border-radius:10px;box-shadow:2px 4px 4px rgb(0 0 0 / 25%);justify-content:center;border:1px solid #bcbcbc" src="https://dolarhoy.com/i/cotizaciones/dolar-blue" frameborder="0"></iframe></div> ',
             background: swalBackground,
             icon: "success",
             confirmButtonColor: "#4CAF50",
