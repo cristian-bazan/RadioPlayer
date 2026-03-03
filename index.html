@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Player</title>
+    <link rel="icon" href="radio.png" type="image/x-icon">
+
+     <!-- Latest compiled and minified CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Latest compiled JavaScript -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <style>
+        [name=titulo]{
+            color: #FF9999;
+        }
+        #rIntenso, h5{
+            color: #F7636A;
+        }
+        #rOscuro{
+            color: #FF0000;
+        }
+     </style>
+
+      <link rel="manifest" href="manifest.json" />
+      <link rel="stylesheet" href="scrollbars.css">
+      <!-- Soporte para iOS -->
+      <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-144x144.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-384x384.png" />
+      <link rel="apple-touch-icon" href="images/icons/icon-512x512.png" />
+      <meta name="apple-mobile-web-app-status-bar" content="#333333" />
+      <meta name="theme-color" content="#16161d" />
+
+</head>
+
+<body data-bs-theme="dark" id="body" style="background-color: #16161d;">
+
+    <nav id="navbar" class="navbar fixed-top bg-dark border-bottom border-body" name="navbar" style="background-color: #333333;">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="font-family: 'CascadiaCode';" id="rIntenso" href="">
+            <img src="radio2.png" alt="" width="27px" height="27px" class="d-inline-block align-text-top">
+            Radio Player
+          </a>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchLight">
+            <label class="form-check-label" for="switchLight">&#127769 / &#9728</label>
+          </div>
+          <button class="navbar-toggler" name="navbarButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header" name="header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Funciones Extra</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" style="background-color: #16161d;">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="btn-frase">Frase del Día</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="btn-cotizacion">Cotización del Dolar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="https://wa.me/?text=Te%20comparto%20el%20link%20a%20RadioPlayer:%20https://cristian-bazan.github.io/RadioPlayer/" target="_blank">Compartir app por WhatsApp</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" id="install" hidden>Instalar App</a>
+                </li>
+              </ul>
+            </div>
+            <div class="">
+              <div class="offcanvas-body" style="background-color: #16161d;">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link" style="font-size: 12px;" href="https://crisbazan.github.io/Portfolio/" target="_blank">Info del Desarrollador</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+   
+    <div class="container-fluid ms-1 mt-5 me-0 pe-0" >
+        <div class="row me-0 pt-3 ps-0 pe-0 pb-4">
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Cadena 3</h4>
+                <audio controls>
+                    <source src="https://27363.live.streamtheworld.com/RADIO3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">40 Principales</h4>
+                <audio controls>
+                    <source src="https://frontend.radiohdvivo.com/los40/live" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Radio Disney</h4>
+                <audio controls>
+                    <source src="https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+                <h4 style="font-family: 'CascadiaCode';" name="titulo">Aspen</h4>
+                <audio controls>
+                    <source src="https://playerservices.streamtheworld.com/api/livestream-redirect/ASPEN.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Cadena Heat</h4>
+              <audio controls>
+                  <source src="https://27323.live.streamtheworld.com/CADENAHEAT.mp3?dist=c3-web" type="audio/mpeg">
+              </audio>
+            </div>
+            
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Rock & Pop</h4>
+              <audio controls>
+                  <source src="https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=300x250%2C728x90&burst-time=15&sbmid=8612fe1c-bef6-448e-d52f-fda7ac9ceca1" type="audio/mpeg">
+              </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">La 100</h4>
+              <audio controls>
+                  <source src="https://27323.live.streamtheworld.com/FM999_56AAC.aac?dist=la100_webplayer&autoplay=0&tdsdk=js-2.9&swm=true&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=380d9612-3dfe-4755-8e15-238eaf11e9af" type="audio/mpeg">
+              </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Cosquin Rock</h4>
+              <audio controls>
+                  <source src="https://19813.live.streamtheworld.com/COSQUINROCK.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Sonidera FM</h4>
+              <audio controls>
+                  <source src="https://servidor1.hostradios.com:8146/stream" type="audio/mpeg">
+              </audio>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 mt-3">
+              <h4 style="font-family: 'CascadiaCode';" name="titulo">Gamba FM</h4>
+              <audio controls>
+                  <source src="https://servidor1.hostradios.com:8132/stream" type="audio/mpeg">
+              </audio>
+            </div>
+
+        </div>
+        <div class="row me-0 pt-4 ps-0 pe-0 pb-4">
+          
+        </div>
+    </div>
+
+    <div class="container-fluid mb-2 pb-2">
+      <div class="row d-flex justify-content-center mb-2 pb-2">
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnlaNacion">LaNación+</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnTN">Todo Noticias</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnEl12">El12 Cba</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnCronica">CronicaTV</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnCanal26">Canal 26</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnTelefeNoticias">Telefe Noticias</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnC5N">C5N</button>
+        <button class="btn btn-outline-secondary btn-lg ms-1 mb-1 col-md-2 col-4" id="btnTelediarioRioIV">Telediario RioIV</button>
+      </div>
+    </div>
+
+    <!--la nacion-->
+    <div class="row justify-content-center">
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0  col-sm-6" id="divLaNacion" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameLaNacion" src="https://www.youtube.com/embed/M_gUd2Bp9g0?si=u6LT_U7OR_-LTyjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!-- TN-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divTN" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameTN" src="https://www.youtube.com/embed/cb12KmMMDJA?si=KnXoKDZwTHzuE1GB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--el 12-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divEl12" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameEl12" src="https://www.youtube.com/embed/nndzeKDSjuc?si=9fCLNKxvhzhSLy6h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--cronica-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divCronica" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameCronica" src="https://www.youtube.com/embed/JC7f3EUDaqw?si=QoioHVj7n6jZl9Ap" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--canal26-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divCanal26" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameCanal26" src="https://www.youtube.com/embed/BExWCJ6RrJg?si=2XPshhZKs5ViABvB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--telefe-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divTelefeNoticias" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameTelefeNoticias" src="https://www.youtube.com/embed/XhAYcYpPzTc?si=BH3_xeBJpXWbCg4b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--c5n-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divC5N" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center">
+          <iframe id="frameC5N" src="https://www.youtube.com/embed/SF06Qy1Ct6Y?si=a4cNZNU3XWKr5EWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+        <!--telediario-->
+      <div class="container-fluid mt-0 mb-0 pb-0 px-0 col-sm-6" id="divTelediarioRioIV" style="display: none;">
+        <div class="ratio ratio-16x9 d-flex justify-content-center" id="twitch-embed">
+          <iframe id="frameTelediarioRioIV" src="https://player.twitch.tv/?channel=telediariotelevision&parent=www.example.com&autoplay=false" frameborder="0" allowfullscreen scrolling="no"></iframe>
+        </div>
+      </div>
+
+    </div>
+
+   <script>
+fetch('data.json')
+  .then(res => res.json())
+  .then(data => {
+
+    const map = {
+      "la nacion+": "frameLaNacion",
+      "tn": "frameTN",
+      "el 12": "frameEl12",
+      "cronica": "frameCronica",
+      "canal 26": "frameCanal26",
+      "telefe": "frameTelefeNoticias",
+      "c5n": "frameC5N"
+    };
+
+    function normalize(text) {
+      return text.toLowerCase().trim();
+    }
+
+    function toEmbed(url) {
+      if (url.includes("watch?v=")) {
+        const videoId = url.split("watch?v=")[1].split("&")[0];
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+      return url;
+    }
+
+    data.forEach(video => {
+      const key = normalize(video.name);
+      const iframeId = map[key];
+
+      if (iframeId) {
+        const iframe = document.getElementById(iframeId);
+        if (iframe) {
+          iframe.src = toEmbed(video.url);
+        }
+      }
+    });
+
+  })
+  .catch(err => console.error("Error cargando JSON:", err));
+</script>
+    
+    <script src="js.js"></script>
+    <script>
+      let prevScrollPos = window.pageYOffset;
+      const navbar = document.getElementById("navbar");
+    
+      window.onscroll = function() {
+        let currentScrollPos = window.pageYOffset;
+    
+        // Solo reacciona a los cambios en la posición vertical
+        if (prevScrollPos > currentScrollPos) {
+          navbar.style.top = "0";  // Mostrar navbar al subir
+        } else if (prevScrollPos < currentScrollPos) {
+          navbar.style.top = "-70px";  // Ocultar navbar al bajar
+        }
+        prevScrollPos = currentScrollPos;
+      };
+    </script>
+
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+<script type="text/javascript">
+  new Twitch.Player("twitch-embed", {
+    channel: "telediariotelevision",
+    autoplay: false
+  });
+</script>
+
+</body>
+</html>
