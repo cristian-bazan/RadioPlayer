@@ -246,7 +246,7 @@
     </div>
 
    <script>
-fetch('data.json')
+fetch(`data.json?v=${Date.now()}`)
   .then(res => res.json())
   .then(data => {
 
