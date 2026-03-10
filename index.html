@@ -93,14 +93,18 @@
         </div>
       </nav>
     
-   
+      <div class="container-fluid ms-1 mt-5 me-0 pe-0">
+  <div class="row me-0 pt-3 ps-0 pe-0 pb-4" id="radioContainer">
+  </div>
+</div>
+   <!--
     <div class="container-fluid ms-1 mt-5 me-0 pe-0" >
         <div class="row me-0 pt-3 ps-0 pe-0 pb-4">
 
             <div class="col-xl-3 col-lg-6 mt-3">
                 <h4 style="font-family: 'CascadiaCode';" name="titulo">Cadena 3</h4>
                 <audio controls>
-                    <source src="https://27363.live.streamtheworld.com/RADIO3.mp3" type="audio/mpeg">
+                    <source src="https://27693.live.streamtheworld.com/RADIO3.mp3" type="audio/mpeg">
                 </audio>
             </div>
 
@@ -168,6 +172,7 @@
             </div>
 
         </div>
+        -->
         <div class="row me-0 pt-4 ps-0 pe-0 pb-4">
           
         </div>
@@ -244,7 +249,8 @@
       </div>
 
     </div>
-
+ 
+    <!-- Script Cargar TVs -->
    <script>
 fetch(`data.json?v=${Date.now()}`)
   .then(res => res.json())
@@ -272,20 +278,54 @@ fetch(`data.json?v=${Date.now()}`)
       return url;
     }
 
-    data.forEach(video => {
-      const key = normalize(video.name);
-      const iframeId = map[key];
+    data
+      .filter(item => item.type === "tv")
+      .forEach(video => {
 
-      if (iframeId) {
-        const iframe = document.getElementById(iframeId);
-        if (iframe) {
-          iframe.src = toEmbed(video.url);
+        const key = normalize(video.name);
+        const iframeId = map[key];
+
+        if (iframeId) {
+          const iframe = document.getElementById(iframeId);
+          if (iframe) {
+            iframe.src = toEmbed(video.url);
+          }
         }
-      }
-    });
+
+      });
 
   })
+
   .catch(err => console.error("Error cargando JSON:", err));
+</script>
+
+<!-- Script cargar Radios -->
+<script>
+fetch(`data.json?v=${Date.now()}`)
+  .then(res => res.json())
+  .then(data => {
+
+    const container = document.getElementById("radioContainer");
+
+    data
+      .filter(item => item.type === "radio")
+      .forEach(radio => {
+
+        const html = `
+        <div class="col-xl-3 col-lg-6 mt-3">
+            <h4 style="font-family: 'CascadiaCode';" name="titulo">${radio.name}</h4>
+            <audio controls>
+                <source src="${radio.url}" type="audio/mpeg">
+            </audio>
+        </div>
+        `;
+
+        container.insertAdjacentHTML("beforeend", html);
+
+      });
+
+  })
+  .catch(err => console.error("Error cargando radios:", err));
 </script>
     
     <script src="js.js"></script>

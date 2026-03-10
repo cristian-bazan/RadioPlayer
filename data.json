@@ -1,30 +1,87 @@
 [
     {
         "name": "La Nacion+",
-        "url": "https://www.youtube.com/watch?v=M_gUd2Bp9g0"
+        "url": "https://www.youtube.com/watch?v=M_gUd2Bp9g0",
+        "type": "tv"
     },
     {
         "name": "TN",
-        "url": "https://www.youtube.com/watch?v=cb12KmMMDJA"
+        "url": "https://www.youtube.com/watch?v=cb12KmMMDJA",
+        "type": "tv"
     },
     {
         "name": "El 12",
-        "url": "https://www.youtube.com/watch?v=nndzeKDSjuc"
+        "url": "https://www.youtube.com/watch?v=nndzeKDSjuc",
+        "type": "tv"
     },
     {
         "name": "Cronica",
-        "url": "https://www.youtube.com/watch?v=JC7f3EUDaqw?si=QoioHVj7n6jZl9Ap"
+        "url": "https://www.youtube.com/watch?v=JC7f3EUDaqw?si=QoioHVj7n6jZl9Ap",
+        "type": "tv"
     },
     {
         "name": "Canal 26",
-        "url": "https://www.youtube.com/watch?v=FoOQO5BqHSA?si=oLBVM4IaRn21JOyp"
+        "url": "https://www.youtube.com/watch?v=FoOQO5BqHSA?si=oLBVM4IaRn21JOyp",
+        "type": "tv"
     },
     {
         "name": "TeLeFe",
-        "url": "https://www.youtube.com/watch?v=XhAYcYpPzTc"
+        "url": "https://www.youtube.com/watch?v=XhAYcYpPzTc",
+        "type": "tv"
     },
     {
         "name": "C5N",
-        "url": "https://www.youtube.com/watch?v=SF06Qy1Ct6Y"
-    }
+        "url": "https://www.youtube.com/watch?v=SF06Qy1Ct6Y",
+        "type": "tv"
+    },
+    {
+    "name": "Cadena 3",
+    "url": "https://27693.live.streamtheworld.com/RADIO3.mp3",
+    "type": "radio"
+  },
+  {
+    "name": "40 Principales",
+    "url": "https://frontend.radiohdvivo.com/los40/live",
+    "type": "radio"
+  },
+  {
+    "name": "Radio Disney",
+    "url": "https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC",
+    "type": "radio"
+  },
+  {
+    "name": "Aspen",
+    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ASPEN.mp3",
+    "type": "radio"
+  },
+  {
+    "name": "Cadena Heat",
+    "url": "https://27323.live.streamtheworld.com/CADENAHEAT.mp3?dist=c3-web",
+    "type": "radio"
+  },
+  {
+    "name": "Rock & Pop",
+    "url": "https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac",
+    "type": "radio"
+  },
+  {
+    "name": "La 100",
+    "url": "https://27323.live.streamtheworld.com/FM999_56AAC.aac",
+    "type": "radio"
+  },
+  {
+    "name": "Cosquin Rock",
+    "url": "https://19813.live.streamtheworld.com/COSQUINROCK.mp3",
+    "type": "radio"
+  },
+  {
+    "name": "Sonidera FM",
+    "url": "https://servidor1.hostradios.com:8146/stream",
+    "type": "radio"
+  },
+  {
+    "name": "Gamba FM",
+    "url": "https://servidor1.hostradios.com:8132/stream",
+    "type": "radio"
+  }
 ]
