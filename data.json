@@ -83,5 +83,10 @@
         "name": "Gamba FM",
         "url": "https://servidor1.hostradios.com:8132/stream",
         "type": "radio"
+    },
+    {
+        "name": "La Popu",
+        "url": "https://29317.live.streamtheworld.com/LAPOPU.mp3",
+        "type": "radio"
     }
 ]
