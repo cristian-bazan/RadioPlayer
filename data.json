@@ -35,53 +35,53 @@
         "type": "tv"
     },
     {
-    "name": "Cadena 3",
-    "url": "https://27693.live.streamtheworld.com/RADIO3.mp3",
-    "type": "radio"
-  },
-  {
-    "name": "40 Principales",
-    "url": "https://frontend.radiohdvivo.com/los40/live",
-    "type": "radio"
-  },
-  {
-    "name": "Radio Disney",
-    "url": "https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC",
-    "type": "radio"
-  },
-  {
-    "name": "Aspen",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ASPEN.mp3",
-    "type": "radio"
-  },
-  {
-    "name": "Cadena Heat",
-    "url": "https://27323.live.streamtheworld.com/CADENAHEAT.mp3?dist=c3-web",
-    "type": "radio"
-  },
-  {
-    "name": "Rock & Pop",
-    "url": "https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac",
-    "type": "radio"
-  },
-  {
-    "name": "La 100",
-    "url": "https://27323.live.streamtheworld.com/FM999_56AAC.aac",
-    "type": "radio"
-  },
-  {
-    "name": "Cosquin Rock",
-    "url": "https://19813.live.streamtheworld.com/COSQUINROCK.mp3",
-    "type": "radio"
-  },
-  {
-    "name": "Sonidera FM",
-    "url": "https://servidor1.hostradios.com:8146/stream",
-    "type": "radio"
-  },
-  {
-    "name": "Gamba FM",
-    "url": "https://servidor1.hostradios.com:8132/stream",
-    "type": "radio"
-  }
+        "name": "Cadena 3",
+        "url": "https://27693.live.streamtheworld.com/RADIO3.mp3",
+        "type": "radio"
+    },
+    {
+        "name": "40 Principales",
+        "url": "https://frontend.radiohdvivo.com/los40/live",
+        "type": "radio"
+    },
+    {
+        "name": "Radio Disney",
+        "url": "https://27613.live.streamtheworld.com/DISNEY_ARG_BA_SC",
+        "type": "radio"
+    },
+    {
+        "name": "Aspen",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ASPEN.mp3",
+        "type": "radio"
+    },
+    {
+        "name": "Cadena Heat",
+        "url": "https://24463.live.streamtheworld.com/CADENAHEAT.mp3",
+        "type": "radio"
+    },
+    {
+        "name": "Rock & Pop",
+        "url": "https://27593.live.streamtheworld.com/ROCKANDPOPAAC.aac",
+        "type": "radio"
+    },
+    {
+        "name": "La 100",
+        "url": "https://27323.live.streamtheworld.com/FM999_56AAC.aac",
+        "type": "radio"
+    },
+    {
+        "name": "Cosquin Rock",
+        "url": "https://19813.live.streamtheworld.com/COSQUINROCK.mp3",
+        "type": "radio"
+    },
+    {
+        "name": "Sonidera FM",
+        "url": "https://servidor1.hostradios.com:8146/stream",
+        "type": "radio"
+    },
+    {
+        "name": "Gamba FM",
+        "url": "https://servidor1.hostradios.com:8132/stream",
+        "type": "radio"
+    }
 ]
