@@ -12,9 +12,7 @@ echo "$(date) — Script iniciado"
 JQ="/usr/bin/jq"
 CURL="/usr/bin/curl"
 GREP="/bin/grep"
-CUT="/usr/bin/cut"
-HEAD="/usr/bin/head"
-TR="/usr/bin/tr"
+SED="/bin/sed"
 
 JSON_FILE="/home/cristian/data.json"
 N8N_URL="http://192.168.14.9:5678/webhook/d7ce39a5-71b8-4102-8594-44dfa11f7188"
@@ -32,17 +30,13 @@ while read -r item; do
 
     response=$("$CURL" -s -A "$UA" "$url")
 
-    status=$(echo "$response" \
-        | "$GREP" -o '"playabilityStatus":{"status":"[^"]*"' \
-        | "$HEAD" -1 \
-        | "$CUT" -d'"' -f6 \
-        | "$TR" -d '[:space:]')
+    player_json=$(echo "$response" \
+        | "$GREP" -o 'ytInitialPlayerResponse = {.*};' \
+        | "$SED" 's/^ytInitialPlayerResponse = //' \
+        | "$SED" 's/;$//')
 
-    embed=$(echo "$response" \
-        | "$GREP" -o '"playableInEmbed":[a-z]*' \
-        | "$HEAD" -1 \
-        | "$CUT" -d':' -f2 \
-        | "$TR" -d '[:space:]')
+    status=$(echo "$player_json" | "$JQ" -r '.playabilityStatus.status')
+    embed=$(echo "$player_json" | "$JQ" -r '.playabilityStatus.playableInEmbed')
 
     echo "Estado detectado: status=$status embed=$embed"
 
