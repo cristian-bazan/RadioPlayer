@@ -12,6 +12,7 @@ echo "$(date) — Script iniciado"
 JQ="/usr/bin/jq"
 CURL="/usr/bin/curl"
 GREP="/bin/grep"
+CUT="/usr/bin/cut"
 HEAD="/usr/bin/head"
 
 JSON_FILE="/home/cristian/data.json"
@@ -30,28 +31,23 @@ while read -r item; do
 
     response=$("$CURL" -s -A "$UA" "$url")
 
-    status=$(echo "$response" \
-        | "$GREP" -o '"playabilityStatus":{"status":"[^"]*"' \
-        | "$HEAD" -1 \
-        | "$GREP" -o '"status":"[^"]*"' \
-        | cut -d'"' -f4)
+    block=$(echo "$response" \
+        | "$GREP" -o '"playabilityStatus":{[^}]*}')
 
-    embed=$(echo "$response" \
+    status=$(echo "$block" \
+        | "$GREP" -o '"status":"[^"]*"' \
+        | "$HEAD" -1 \
+        | "$CUT" -d'"' -f4)
+
+    embed=$(echo "$block" \
         | "$GREP" -o '"playableInEmbed":[^,]*' \
         | "$HEAD" -1 \
-        | cut -d':' -f2)
+        | "$CUT" -d':' -f2)
 
     echo "Estado detectado: status=$status embed=$embed"
 
-    if [ "$status" != "OK" ]; then
-        alert=1
-    elif [ "$embed" = "false" ]; then
-        alert=1
-    else
-        alert=0
-    fi
+    if [ "$status" != "OK" ] || [ "$embed" = "false" ]; then
 
-    if [ "$alert" = "1" ]; then
         echo "ALERTA: $name"
 
         ERROR_COUNT=$((ERROR_COUNT + 1))
