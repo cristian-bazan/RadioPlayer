@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# =========================
-# DEBUG / LOG PARA CRON
-# =========================
 if [ -t 1 ]; then
   set -x
 else
@@ -12,28 +9,18 @@ fi
 
 echo "$(date) — Script iniciado"
 
-# =========================
-# BINARIOS
-# =========================
 JQ="/usr/bin/jq"
 CURL="/usr/bin/curl"
 GREP="/bin/grep"
-CUT="/usr/bin/cut"
 HEAD="/usr/bin/head"
 
-# =========================
-# CONFIG
-# =========================
 JSON_FILE="/home/cristian/data.json"
 N8N_URL="http://192.168.14.9:5678/webhook/d7ce39a5-71b8-4102-8594-44dfa11f7188"
 
-UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+UA="Mozilla/5.0"
 
 ERROR_COUNT=0
 
-# =========================
-# LOOP
-# =========================
 while read -r item; do
 
     name=$("$JQ" -r '.name' <<< "$item")
@@ -46,17 +33,25 @@ while read -r item; do
     status=$(echo "$response" \
         | "$GREP" -o '"playabilityStatus":{"status":"[^"]*"' \
         | "$HEAD" -1 \
-        | "$CUT" -d'"' -f6)
+        | "$GREP" -o '"status":"[^"]*"' \
+        | cut -d'"' -f4)
 
     embed=$(echo "$response" \
         | "$GREP" -o '"playableInEmbed":[^,]*' \
         | "$HEAD" -1 \
-        | "$CUT" -d':' -f2)
+        | cut -d':' -f2)
 
-    echo "Estado: $status | Embed: $embed"
+    echo "Estado detectado: status=$status embed=$embed"
 
-    if [ "$status" != "OK" ] || [ "$embed" = "false" ]; then
+    if [ "$status" != "OK" ]; then
+        alert=1
+    elif [ "$embed" = "false" ]; then
+        alert=1
+    else
+        alert=0
+    fi
 
+    if [ "$alert" = "1" ]; then
         echo "ALERTA: $name"
 
         ERROR_COUNT=$((ERROR_COUNT + 1))
