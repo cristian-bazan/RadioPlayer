@@ -31,16 +31,13 @@ while read -r item; do
 
     response=$("$CURL" -s -A "$UA" "$url")
 
-    block=$(echo "$response" \
-        | "$GREP" -o '"playabilityStatus":{[^}]*}')
-
-    status=$(echo "$block" \
-        | "$GREP" -o '"status":"[^"]*"' \
+    status=$(echo "$response" \
+        | "$GREP" -o '"playabilityStatus":{"status":"[^"]*"' \
         | "$HEAD" -1 \
-        | "$CUT" -d'"' -f4)
+        | "$CUT" -d'"' -f6)
 
-    embed=$(echo "$block" \
-        | "$GREP" -o '"playableInEmbed":[^,]*' \
+    embed=$(echo "$response" \
+        | "$GREP" -o '"playableInEmbed":[a-z]*' \
         | "$HEAD" -1 \
         | "$CUT" -d':' -f2)
 
