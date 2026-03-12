@@ -35,6 +35,11 @@
         "type": "tv"
     },
     {
+        "name": "Canal 13",
+        "url": "https://livetrx01.vodgc.net/eltrecetv/tracks-v1a1/mono.m3u8",
+        "type": "tv"
+    },
+    {
         "name": "Cadena 3",
         "url": "https://27693.live.streamtheworld.com/RADIO3.mp3",
         "type": "radio"
@@ -88,10 +93,5 @@
         "name": "La Popu",
         "url": "https://29317.live.streamtheworld.com/LAPOPU.mp3",
         "type": "radio"
-    },
-    {
-        "name": "Canal 13",
-        "url": "https://livetrx01.vodgc.net/eltrecetv/tracks-v1a1/mono.m3u8",
-        "type": "tv"
     }
 ]
