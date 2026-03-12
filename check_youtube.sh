@@ -41,11 +41,17 @@ while read -r item; do
 
     response=$("$CURL" -s "$url")
 
-    block=$(echo "$response" | "$GREP" -o '"playabilityStatus":[^}]*')
+    # status real del player
+    status=$(echo "$response" \
+        | "$GREP" -o '"playabilityStatus":{"status":"[^"]*"' \
+        | "$HEAD" -1 \
+        | "$CUT" -d'"' -f6)
 
-    status=$(echo "$block" | "$GREP" -o '"status":"[^"]*"' | "$CUT" -d'"' -f4)
-
-    embed=$(echo "$block" | "$GREP" -o '"playableInEmbed":[^,]*' | "$CUT" -d':' -f2)
+    # permiso de iframe
+    embed=$(echo "$response" \
+        | "$GREP" -o '"playableInEmbed":[^,]*' \
+        | "$HEAD" -1 \
+        | "$CUT" -d':' -f2)
 
     echo "Estado: $status | Embed: $embed"
 
