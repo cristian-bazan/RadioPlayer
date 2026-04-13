@@ -206,13 +206,33 @@ function loadTV(data){
   const btnContainer = document.getElementById("tvButtons")
   const playerContainer = document.getElementById("tvPlayers")
 
-  function toEmbed(url){
-      if(url.includes("watch?v=")){
-          const id = url.split("watch?v=")[1].split("&")[0]
-          return `https://www.youtube.com/embed/${id}`
-      }
-      return url
-  }
+  function toEmbed(url) {
+    // Obtener el dominio actual (ej: localhost o tu-usuario.github.io)
+    const host = window.location.hostname;
+
+    // Si es YouTube
+    if (url.includes("watch?v=")) {
+        const id = url.split("watch?v=")[1].split("&")[0];
+        return `https://www.youtube.com/embed/${id}`;
+    }
+
+    // Si es Twitch (Detecta si es player.twitch.tv o simplemente el link del canal)
+    if (url.includes("twitch.tv")) {
+        let baseUrl = url;
+        
+        // Si pusiste el link normal (twitch.tv/canal), lo convierte a link de reproductor
+        if (!url.includes("player.twitch.tv")) {
+            const channel = url.split("twitch.tv/")[1].split("/")[0];
+            baseUrl = `https://player.twitch.tv/?channel=${channel}`;
+        }
+
+        // Agrega el parent dinámico y quita el autoplay si prefieres
+        // El parent es OBLIGATORIO para que Twitch cargue
+        return `${baseUrl}&parent=${host}&autoplay=false`;
+    }
+
+    return url;
+}
 
   data
     .filter(item => item.type === "tv")
