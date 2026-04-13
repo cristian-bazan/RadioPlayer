@@ -93,5 +93,10 @@
         "name": "La Popu",
         "url": "https://29317.live.streamtheworld.com/LAPOPU.mp3",
         "type": "radio"
+    },
+    {
+        "name": "Telediario Rio IV",
+        "url": "https://player.twitch.tv/?channel=telediariotelevision&parent=www.example.com&autoplay=false",
+        "type": "tv"
     }
 ]
