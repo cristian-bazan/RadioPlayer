@@ -96,7 +96,7 @@
     },
     {
         "name": "Telediario Rio IV",
-        "url": "https://player.twitch.tv/?channel=telediariotelevision&parent=www.example.com&autoplay=false",
+        "url": "https://player.twitch.tv/?channel=telediariotelevision",
         "type": "tv"
     }
 ]
