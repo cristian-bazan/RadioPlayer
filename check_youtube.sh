@@ -19,9 +19,7 @@ GREP="/bin/grep"
 
 JSON_FILE="/home/cristian/data.json"
 N8N_URL="http://192.168.14.9:5678/webhook/d7ce39a5-71b8-4102-8594-44dfa11f7188"
-
-# User Agent de un iPhone para que YT entregue una versión más simplificada y fácil de leer
-UA="Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 ERROR_COUNT=0
 
@@ -30,7 +28,6 @@ while read -u 3 -r item; do
     name=$("$JQ" -r '.name' <<< "$item")
     url=$("$JQ" -r '.url' <<< "$item")
 
-    # Solo procesar YouTube
     if [[ "$url" != *"youtube.com"* ]] && [[ "$url" != *"youtu.be"* ]]; then
         continue
     fi
@@ -38,26 +35,33 @@ while read -u 3 -r item; do
     echo "------------------------------------------"
     echo "Chequeando: $name"
 
-    # 1. Obtenemos el Código HTTP (200, 404, etc) y el cuerpo por separado
-    # Usamos un timeout de 10 segundos para no trabar el script
-    response_data=$("$CURL" -s -L -A "$UA" --max-time 10 "$url" < /dev/null)
-    
-    # 2. Lógica de detección de "Caído":
-    # Buscamos patrones que SOLO aparecen cuando el video NO existe o NO es un vivo.
-    # Pattern A: El video no existe o es privado
-    # Pattern B: La estructura típica de error en la versión móvil
-    is_not_available=$(echo "$response_data" | "$GREP" -Ei "video-not-playable-renderer|reason\":\"Video no disponible\"|reason\":\"Este video es privado\"")
-    
-    # 3. Verificamos si hay rastro de que sea un vivo (para evitar el falso positivo de La Nación+)
-    has_live_indicator=$(echo "$response_data" | "$GREP" -Ei "LIVE|en vivo|isLive\":true")
+    # Petición limpia
+    response=$("$CURL" -s -L -A "$UA" "$url" < /dev/null)
 
-    if [[ -n "$is_not_available" ]]; then
-        # Si dice que no está disponible, pero encontramos indicadores de "LIVE", 
-        # lo tomamos como un falso positivo de bot y NO alertamos.
-        if [[ -n "$has_live_indicator" ]]; then
-            echo "OK (Falso positivo evitado): $name parece funcionar pero YT intenta bloquearnos."
+    # 1. Definimos los patrones de error reales que mencionaste
+    # Agregamos el de Telefe (reproducción inhabilitada)
+    ERROR_1="La grabación de esta transmisión en vivo no está disponible"
+    ERROR_2="Video no disponible"
+    ERROR_3="inhabilitó la reproducción en otros sitios web"
+    ERROR_4="Este video es privado"
+
+    # 2. Buscamos si existe alguno de estos errores
+    check_error=$(echo "$response" | "$GREP" -Ei "$ERROR_1|$ERROR_2|$ERROR_3|$ERROR_4")
+
+    # 3. Verificamos si realmente hay un reproductor activo (buscando el ID del video o "OFFLINE")
+    # Si el video está caído, YouTube suele poner "playabilityStatus":{"status":"ERROR"
+    is_unplayable=$(echo "$response" | "$GREP" -o '"status":"UNPLAYABLE"')
+
+    if [[ -n "$check_error" ]]; then
+        
+        # CASO ESPECIAL LA NACION+: 
+        # Si el error es "inhabilitó la reproducción" pero el status NO es UNPLAYABLE, es un falso positivo.
+        # Pero si dice "Grabación no disponible" o "Video no disponible", es caída real.
+        
+        if [[ "$name" == *"Nacion"* ]] && [[ "$check_error" == *"$ERROR_3"* ]]; then
+            echo "OK: $name reporta restricción de inserción pero el vivo sigue activo."
         else
-            echo "ALERTA CONFIRMADA: $name está caído realmente."
+            echo "ALERTA CONFIRMADA: $name está caído. Motivo detectado: $check_error"
             ERROR_COUNT=$((ERROR_COUNT + 1))
 
             "$CURL" -s -X POST \
@@ -66,7 +70,7 @@ while read -u 3 -r item; do
                 "$N8N_URL" < /dev/null
         fi
     else
-        echo "OK: $name está correcto."
+        echo "OK: $name está funcionando."
     fi
 
 done 3< <("$JQ" -c '.[]' "$JSON_FILE")
