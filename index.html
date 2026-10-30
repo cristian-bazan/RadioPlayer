@@ -878,8 +878,8 @@
         }
         .radio-card{
             display: grid;
-            grid-template-columns: 52px 1fr 46px;
-            grid-template-areas: "art info play" "vol vol vol";
+            grid-template-columns: 52px 1fr auto;
+            grid-template-areas: "art info play" "vol vol acts";
             align-items: center;
             gap: 12px;
             padding: 14px !important;
@@ -889,9 +889,12 @@
             box-shadow: var(--shadow);
         }
         .radio-card:hover{ transform: translateY(-2px); }
-        .radio-card[data-state="paused"]{ border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
-        .radio-card[data-state="paused"] .rc-status{ color: var(--text); }
-        .radio-card[data-state="paused"] .rc-status::before{
+        .radio-card[data-state="paused"],
+        .radio-card[data-state="saved"]{ border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+        .radio-card[data-state="paused"] .rc-status,
+        .radio-card[data-state="saved"] .rc-status{ color: var(--text); }
+        .radio-card[data-state="paused"] .rc-status::before,
+        .radio-card[data-state="saved"] .rc-status::before{
             content: ""; width: 6px; height: 6px; border-radius: 50%;
             background: var(--accent-2);
         }
@@ -973,6 +976,28 @@
         .radio-card[data-state="loading"] .rc-play .ic-play{ display: none; }
         .radio-card[data-state="loading"] .rc-play .ic-spin{ display: block; animation: spin .9s linear infinite; }
         @keyframes spin{ to{ transform: rotate(360deg); } }
+
+        .rc-play{ justify-self: end; }
+
+        .rc-acts{
+            grid-area: acts;
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+        .rc-btn{
+            width: 32px; height: 32px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: transparent;
+            color: var(--text);
+            transition: transform .1s, background .2s, color .2s;
+        }
+        .rc-btn[hidden]{ display: none; }
+        .rc-btn:hover{ background: var(--accent-soft); color: var(--accent-text); }
+        .rc-btn:active{ transform: scale(.92); }
 
         .rc-vol{
             grid-area: vol;

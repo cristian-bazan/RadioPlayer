@@ -655,6 +655,8 @@ $(function(){
     const ICON_PLAY  = '<svg class="ic-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>'
     const ICON_PAUSE = '<svg class="ic-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>'
     const ICON_SPIN  = '<svg class="ic-spin" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9"/></svg>'
+    const ICON_STOP  = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>'
+    const ICON_SAVE  = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>'
     const ICON_VOL   = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
 
     // Espera generosa: hay servidores que tardan varios segundos en entregar el primer audio
@@ -714,10 +716,28 @@ $(function(){
         vol.innerHTML = ICON_VOL + '<input type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen ' + name.replace(/"/g, "") + '">'
         const range = vol.querySelector("input")
 
+        const acts = document.createElement("div")
+        acts.className = "rc-acts"
+        const keep = document.createElement("button")
+        keep.type = "button"
+        keep.className = "rc-btn"
+        keep.innerHTML = ICON_SAVE
+        keep.title = "Dejar de cargar y guardar lo cargado hasta acá"
+        keep.setAttribute("aria-label", "Guardar lo cargado de " + name)
+        const stop = document.createElement("button")
+        stop.type = "button"
+        stop.className = "rc-btn"
+        stop.innerHTML = ICON_STOP
+        stop.title = "Parar y descartar lo guardado"
+        stop.setAttribute("aria-label", "Parar " + name)
+        acts.appendChild(keep)
+        acts.appendChild(stop)
+
         card.insertBefore(art, card.firstChild)
         card.insertBefore(info, art.nextSibling)
         card.insertBefore(play, info.nextSibling)
         card.insertBefore(vol, play.nextSibling)
+        card.insertBefore(acts, vol.nextSibling)
 
         /*
           wanted:     lo que pidió el usuario ("stop" | "play" | "pause")
@@ -725,6 +745,11 @@ $(function(){
                       la pausa NO corta la descarga: el navegador sigue guardando la
                       transmisión y al dar play continúa desde donde se pausó.
                       Solo al recargar la página (o si el servidor corta) se vuelve al vivo.
+          capture:    copia propia de la transmisión (fetch) que se graba durante la pausa.
+                      El <audio> no permite cortar su descarga sin perder el buffer, así
+                      que "guardar" corta todo y pasa a reproducir esta copia.
+          saved:      grabación guardada ({ url, ms }); mientras exista se reproduce
+                      ella en lugar del vivo, hasta que termine o se pulse Parar.
         */
         let wanted = "stop"
         let hasSession = false
@@ -736,6 +761,64 @@ $(function(){
         let watchdog = null
         let retryTimer = null
         let retryPending = false
+        let capture = null
+        let saved = null
+
+        // Graba la transmisión desde ahora, en paralelo al <audio> en pausa
+        function startCapture(){
+            stopCapture()
+            const src = audio.currentSrc
+            if (!src || !window.fetch || !window.AbortController) return
+            const c = { ctrl: new AbortController(), chunks: [], bytes: 0, start: Date.now(), type: "" }
+            capture = c
+            fetch(src, { signal: c.ctrl.signal, cache: "no-store" }).then(res => {
+                if (!res.ok || !res.body) throw new Error("HTTP " + res.status)
+                c.type = (res.headers.get("content-type") || "").split(";")[0]
+                const reader = res.body.getReader()
+                const pump = () => reader.read().then(({ done, value }) => {
+                    if (done || capture !== c) return
+                    c.chunks.push(value)
+                    c.bytes += value.length
+                    return pump()
+                })
+                return pump()
+            }).catch(() => {
+                // Sin CORS o corte de red: no se puede guardar (la pausa normal sigue funcionando)
+                if (capture === c && !c.bytes) capture = null
+                tick()
+            })
+        }
+
+        function stopCapture(){
+            if (capture) capture.ctrl.abort()
+            capture = null
+        }
+
+        function discardSaved(){
+            if (!saved) return
+            URL.revokeObjectURL(saved.url)
+            saved = null
+            audio.removeAttribute("src")   // vuelve a usar el <source> del vivo
+        }
+
+        // Corta toda descarga y deja lista la grabación para reproducirla luego
+        function keepSaved(){
+            const c = capture
+            if (!c || !c.bytes) return
+            stopCapture()
+            token++
+            clearTimers()
+            retryPending = false
+            hasSession = false
+            discardSaved()
+            const blob = new Blob(c.chunks, c.type ? { type: c.type } : {})
+            saved = { url: URL.createObjectURL(blob), ms: Date.now() - c.start }
+            wanted = "pause"
+            audio.preload = "auto"
+            audio.src = saved.url
+            audio.load()
+            setState("saved")
+        }
 
         function clearTimers(){
             clearTimeout(watchdog)
@@ -761,7 +844,13 @@ $(function(){
             else if (s === "paused") text = hasSession
                 ? "En pausa · guardando " + fmtTime(Date.now() - pausedAt)
                 : "En pausa · se reanudará en vivo"
+            if (saved && (s === "playing" || s === "saved" || s === "loading")) {
+                text = (s === "saved" ? "Guardado · " : "Reproduciendo guardado · ")
+                    + fmtTime(audio.currentTime * 1000) + " / " + fmtTime(saved.ms)
+            }
             if (status.textContent !== text) status.textContent = text
+            stop.hidden = s === "idle" || s === "error"
+            keep.hidden = !(s === "paused" && hasSession && capture && capture.bytes)
         }
         radioTicks.add(tick)
 
@@ -773,6 +862,8 @@ $(function(){
             attempts++
             hasSession = false
             pausedTotal = 0
+            stopCapture()
+            discardSaved()
             setState("loading")
             audio.preload = "auto"   // mantener la descarga activa también en pausa
             audio.load()
@@ -802,25 +893,50 @@ $(function(){
             }
         }
 
+        // Parar: corta la descarga y descarta todo lo guardado (el próximo play va al vivo)
         function stopConnecting(){
             token++
             clearTimers()
             retryPending = false
             wanted = "stop"
             hasSession = false
+            pausedTotal = 0
+            stopCapture()
+            discardSaved()
+            audio.pause()
             audio.preload = "none"
             audio.load()   // corta la descarga pendiente
             setState("idle")
         }
 
+        stop.addEventListener("click", stopConnecting)
+        keep.addEventListener("click", keepSaved)
+
         play.addEventListener("click", () => {
             const s = card.dataset.state
+
+            if (saved) {
+                // Reproducción de la grabación guardada: play / pausa sin tocar la red
+                if (s === "playing" || s === "loading") {
+                    wanted = "pause"
+                    audio.pause()
+                    setState("saved")
+                } else {
+                    wanted = "play"
+                    setState("loading")
+                    audio.play().catch(err => {
+                        if (err.name !== "AbortError" && wanted === "play") { wanted = "pause"; setState("saved") }
+                    })
+                }
+                return
+            }
 
             if (s === "playing" || (s === "loading" && hasSession)) {
                 wanted = "pause"
                 pausedAt = Date.now()
                 audio.pause()
                 setState("paused")
+                startCapture()
                 return
             }
             if (s === "loading") { stopConnecting(); return }
@@ -832,6 +948,7 @@ $(function(){
 
             if (s === "paused" && hasSession && !audio.error) {
                 // Continuar desde donde se pausó, usando lo que se siguió guardando
+                stopCapture()
                 pausedTotal += Date.now() - pausedAt
                 setState("loading")
                 audio.play().catch(err => {
@@ -848,6 +965,7 @@ $(function(){
 
         audio.addEventListener("playing", () => {
             if (wanted !== "play") return
+            if (saved) { setState("playing"); return }
             clearTimers()
             hasSession = true
             attempts = 0
@@ -857,30 +975,43 @@ $(function(){
             if (wanted === "play" && !audio.paused) setState("loading")
         })
         audio.addEventListener("pause", () => {
-            if (wanted === "play" && hasSession) {
+            if (wanted === "play" && saved) {
+                wanted = "pause"
+                setState("saved")
+            } else if (wanted === "play" && hasSession) {
                 // Pausa externa (auriculares, controles del sistema)
                 wanted = "pause"
                 pausedAt = Date.now()
                 setState("paused")
+                startCapture()
             }
         })
         audio.addEventListener("play", () => {
-            if (wanted === "pause" && hasSession) {
+            if (wanted === "pause" && saved) {
+                wanted = "play"
+            } else if (wanted === "pause" && hasSession) {
                 // Reanudado desde controles del sistema
                 wanted = "play"
+                stopCapture()
                 pausedTotal += Date.now() - pausedAt
             }
         })
-        // Se terminó lo descargado o el servidor cortó: reconectar al vivo
+        // Se terminó lo descargado (o lo guardado) o el servidor cortó: reconectar al vivo
         audio.addEventListener("ended", () => {
             if (wanted === "play") { attempts = 0; firstStart = Date.now(); connect() }
         })
         function onError(){
+            if (saved) {
+                // La grabación no se pudo decodificar: descartarla
+                if (audio.error) stopConnecting()
+                return
+            }
             if (wanted === "play") {
                 if (hasSession) { attempts = 0; firstStart = Date.now(); connect() }
                 else fail(token)
             } else if (wanted === "pause") {
                 hasSession = false
+                stopCapture()
                 tick()
             }
         }
